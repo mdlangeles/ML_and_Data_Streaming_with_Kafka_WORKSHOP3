@@ -16,7 +16,6 @@ def del_cols(df):
     return df
 
 
-
 def dummies(df):
     df = pd.get_dummies(df, columns=['continent'], prefix='continent')
     return df
