@@ -10,7 +10,6 @@ def continent(country):
     except:
         return None
     
-
 def del_cols(df):
     df.drop(columns=['country', 'happiness_rank'], inplace=True)
     return df
