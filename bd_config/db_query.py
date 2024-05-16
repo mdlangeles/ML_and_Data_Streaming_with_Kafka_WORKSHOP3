@@ -27,12 +27,14 @@ def create_table():
         cursor = conn.cursor()
 
         cursor.execute("""CREATE TABLE IF NOT EXISTS happiness (
-                        id SERIAL PRIMARY KEY,
+                        ID SERIAL PRIMARY KEY,
+                        year INT,
+                        social_support FLOAT,
                         gdp_per_capita FLOAT,
                         healthy_life_expectancy FLOAT,
                         freedom FLOAT,
                         generosity FLOAT,
-                        government_gorruption FLOAT,
+                        government_corruption FLOAT,
                         continent_africa BOOLEAN,
                         continent_america BOOLEAN,
                         continent_asia BOOLEAN,
@@ -40,6 +42,7 @@ def create_table():
                         continent_oceania BOOLEAN,
                         happiness_score FLOAT,
                         predicted_happiness_score FLOAT)""")
+
   
         conn.commit()
         cursor.close()
@@ -54,21 +57,23 @@ def load(data):
         conn = connection()
         cursor = conn.cursor()
 
-        insert = """INSERT INTO happiness(gdp_per_capita, healthy_life_expectancy, freedom, generosity, government_corruption, continent_africa,
-                            continent_america, continent_asia, continent_europe, continent_oceania, happiness_score, predicted_happiness_score)
-                            VALUES (%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s)"""
+        insert = """INSERT INTO happiness(year, social_support, gdp_per_capita, healthy_life_expectancy, freedom, generosity, government_corruption, continent_africa,
+                      continent_america, continent_asia, continent_europe, continent_oceania, happiness_score, predicted_happiness_score)
+                      VALUES (%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s)"""
         
         data = (
+            float(data['year'].iloc[0]),
+            float(data['social_support'].iloc[0]),
             float(data['gdp_per_capita'].iloc[0]), 
             float(data['healthy_life_expectancy'].iloc[0]), 
             float(data['freedom'].iloc[0]), 
             float(data['generosity'].iloc[0]),
             float(data['government_corruption'].iloc[0]), 
-            bool(data['continent_africa'].iloc[0]),
-            bool(data['continent_america'].iloc[0]), 
-            bool(data['continent_asia'].iloc[0]), 
-            bool(data['continent_europe'].iloc[0]), 
-            bool(data['continent_oceania'].iloc[0]), 
+            bool(data['continent_Africa'].iloc[0]),
+            bool(data['continent_America'].iloc[0]), 
+            bool(data['continent_Asia'].iloc[0]), 
+            bool(data['continent_Europe'].iloc[0]), 
+            bool(data['continent_Oceania'].iloc[0]), 
             float(data['happiness_score'].iloc[0]), 
             float(data['predicted_happiness_score'].iloc[0])
         )
@@ -94,9 +99,10 @@ def get_data():
         cursor.execute(get_data)
 
         data = cursor.fetchall()
-        columns = ['id', 'gdp_per_capita', 'healthy_life_expectancy', 'freedom', 'generosity', 'government_corruption',
-                   'continent_africa', 'continent_america', 'continent_asia', 'continent_europe', 'continent_oceania',
-                   'happiness_score', 'predicted_happiness_score']
+        columns = ['id', 'year', 'social_support', 'gdp_per_capita', 'healthy_life_expectancy', 'freedom', 'generosity', 'government_corruption',
+                    'continent_africa', 'continent_america', 'continent_asia', 'continent_europe', 'continent_oceania',
+                    'happiness_score', 'predicted_happiness_score']
+
         
         df = pd.DataFrame(data, columns=columns)
 

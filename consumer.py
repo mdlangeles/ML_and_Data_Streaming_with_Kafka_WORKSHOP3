@@ -3,58 +3,60 @@ import joblib
 from kafka import KafkaConsumer
 import pandas as pd
 
+#from bd_config.db_query import create_table
 import bd_config.db_query as db
 
+
+# Cargar el modelo una sola vez fuera de la función predict
 model = joblib.load('Notebooks/model.pkl')
 
+
 def predict(m):
-   s = loads(m.value)
-   # s = m.value
-   # print(s)
-   # print(type(s))
-
-   # create df
-   data = {
-        key: [value] for key, value in s.items()
-    }
+    # Decodificar el mensaje
+    s = loads(m.value)
    
-   df = pd.DataFrame(data)
+    # Crear un DataFrame a partir de los datos del mensaje
+    df = pd.DataFrame(s, index=[0])
 
-   pred_df = df.drop(columns=['Happiness Score'], axis = 1)
-#    print(pred_df.columns)
-   prediction = model.predict(pred_df)
+    # Predecir utilizando el modelo cargado
+    prediction = model.predict(df.drop(columns=['happiness_score'], axis=1))
 
-   df['Predicted Happiness Score'] = prediction
+    # Añadir la columna de predicciones al DataFrame
+    df['predicted_happiness_score'] = prediction
 
-   # print(df.head())
-
-   return df
+    return df
 
 
 def kafka_consumer():
-    
+    # Configurar el consumidor de Kafka
     consumer = KafkaConsumer(
         'test-data',
         auto_offset_reset='earliest',
         enable_auto_commit=True,
         group_id='my-group-1',
         value_deserializer=lambda m: loads(m.decode('utf-8')),
-        bootstrap_servers= ['localhost:9092'],
+        bootstrap_servers=['localhost:9092'],
     )
 
     while True:
-        message = consumer.poll(timeout_ms=5000)  # wait 5 seconds for messages
+        # Esperar por mensajes durante 5 segundos
+        message = consumer.poll(timeout_ms=5000)
 
+        # Salir si no hay más mensajes
         if not message:
-            break  # no more messagges, exit the loop
+            break
         
+        # Procesar los mensajes recibidos
         for _, messages in message.items():
-            
             for m in messages:
+                # Predecir y cargar los datos en la base de datos
                 row = predict(m)
                 db.load(row)
 
+
 if __name__ == '__main__':
-   
-   db.create_table()
-   kafka_consumer()
+    # Crear la tabla en la base de datos si no existe
+    db.create_table()
+
+    # Ejecutar el consumidor de Kafka
+    kafka_consumer()

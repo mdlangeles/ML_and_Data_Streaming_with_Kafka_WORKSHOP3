@@ -2,6 +2,6 @@
     "user": "postgres",
     "password": "postgres",
     "port": 5432,
-    "server": "localhost",
-    "db": "Workshop_3"
+    "host": "localhost",
+    "database": "Workshop_3"
 }
