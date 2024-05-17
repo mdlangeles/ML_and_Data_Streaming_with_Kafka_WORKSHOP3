@@ -8,7 +8,7 @@ import bd_config.db_query as db
 
 
 # Cargar el modelo una sola vez fuera de la función predict
-model = joblib.load('Notebooks/model.pkl')
+model = joblib.load('../Model/model.pkl')
 
 
 def predict(m):

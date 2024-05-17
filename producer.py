@@ -4,7 +4,7 @@ import pandas as pd
 from time import sleep
 import datetime as dt
 
-from utils.utils import continent, del_cols, dummies
+from service.transformations import continent, del_cols, dummies
 
 
 def test_data():

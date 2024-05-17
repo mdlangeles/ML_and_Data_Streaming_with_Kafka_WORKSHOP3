@@ -17,4 +17,10 @@ def del_cols(df):
 
 def dummies(df):
     df = pd.get_dummies(df, columns=['continent'], prefix='continent')
+    
+    for col in df.columns:
+        if df[col].dtype == bool:
+            df[col] = df[col].astype(int)
+    
     return df
+
