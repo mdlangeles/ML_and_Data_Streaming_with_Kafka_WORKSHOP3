@@ -10,17 +10,17 @@ def continent(country):
     except:
         return None
     
-def del_cols(df):
-    df.drop(columns=['country', 'happiness_rank'], inplace=True)
-    return df
-
-
-def dummies(df):
+def convert_to_dummy(df):
     df = pd.get_dummies(df, columns=['continent'], prefix='continent')
-    
+
     for col in df.columns:
         if df[col].dtype == bool:
+            df[col] = df[col].astype(int)
+        elif df[col].dtype == int:
             df[col] = df[col].astype(int)
     
     return df
 
+def delete_columns(df):
+    df.drop(columns=['country', 'happiness_rank'], inplace=True)
+    return df

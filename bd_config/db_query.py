@@ -3,9 +3,8 @@ import psycopg2
 import pandas as pd
 import os
 
-# Ruta del directorio actual del archivo
 current_dir = os.path.dirname(os.path.abspath(__file__))
-# Ruta del archivo de configuración
+
 config_path = os.path.join(current_dir, '../db_config.json')
 
 def connection():
@@ -14,7 +13,6 @@ def connection():
             config = json.load(config_json)
 
         conn = psycopg2.connect(**config)
-        print("Conexión exitosa a la base de datos")
         return conn
     
     except psycopg2.Error as err:
@@ -35,11 +33,11 @@ def create_table():
                         freedom FLOAT,
                         generosity FLOAT,
                         government_corruption FLOAT,
-                        continent_africa BOOLEAN,
-                        continent_america BOOLEAN,
-                        continent_asia BOOLEAN,
-                        continent_europe BOOLEAN,
-                        continent_oceania BOOLEAN,
+                        continent_africa INT,
+                        continent_america INT,
+                        continent_asia INT,
+                        continent_europe INT,
+                        continent_oceania INT,
                         happiness_score FLOAT,
                         predicted_happiness_score FLOAT)""")
 
@@ -69,11 +67,11 @@ def load(data):
             float(data['freedom'].iloc[0]), 
             float(data['generosity'].iloc[0]),
             float(data['government_corruption'].iloc[0]), 
-            bool(data['continent_Africa'].iloc[0]),
-            bool(data['continent_America'].iloc[0]), 
-            bool(data['continent_Asia'].iloc[0]), 
-            bool(data['continent_Europe'].iloc[0]), 
-            bool(data['continent_Oceania'].iloc[0]), 
+            int(data['continent_Africa'].iloc[0]),
+            int(data['continent_America'].iloc[0]), 
+            int(data['continent_Asia'].iloc[0]), 
+            int(data['continent_Europe'].iloc[0]), 
+            int(data['continent_Oceania'].iloc[0]), 
             float(data['happiness_score'].iloc[0]), 
             float(data['predicted_happiness_score'].iloc[0])
         )
@@ -89,7 +87,7 @@ def load(data):
     except psycopg2.Error as err:
         print(f"Error to insert the data: {err}")
 
-def get_data():   
+def get_happiness_data():   
     try: 
         conn = connection()
         cursor = conn.cursor()
@@ -109,13 +107,10 @@ def get_data():
         conn.commit()
         cursor.close()
         conn.close()
-
-        # print(df.head())
-        print("Datos obtenidos exitosamente")
+        print("Data successfully obtained")
         return df
 
     except psycopg2.Error as err:
-        print(f"Error al obtener datos: {err}")
+        print(f"Error getting data: {err}")
 
-# if __name__ == "__main__":
-#    get_data()
+
