@@ -35,8 +35,8 @@ The **Data** folder contains the csv worked on this project:
   - 2017.csv
   - 2018.csv
   - 2019.csv
-  - x_test.csv
-  - y_test.csv
+  - x_test.csv: this csv is saved when running the project, scan the notebooks for more detail.
+  - y_test.csv: this csv is saved when running the project, scan the notebooks for more detail.
     
 The **Model** folder contains the model.pkl used to work in this project.
 
