@@ -1,3 +1,7 @@
+<div style="text-align: center;">
+    <img src="https://github.com/mdlangeles/Workshop_1/assets/111391755/1efa1459-711a-4b66-b187-1113e46912c8" alt="airf" width="700" height="300">
+</div>
+
 # Workshop_3: Machine Learning and Data Streaming :chart_with_downwards_trend: :open_file_folder:
 ## By: María de los Ángeles Amú Moreno :woman_technologist:
 In this project, a comprehensive analysis and development has been carried out to predict the happiness index of different countries using machine learning techniques. From five CSV files containing information about the happiness index in different countries, a regression model was trained to predict the happiness index. The process started with a thorough Exploratory Data Analysis (EDA) and an Extract, Transform and Load (ETL) procedure to extract and prepare the relevant features from the files. Subsequently, the model was trained using a data split of 70\% for training and 30\% for testing.
