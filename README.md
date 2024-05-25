@@ -1,4 +1,4 @@
-<img src= "https://github.com/mdlangeles/Workshop_1/assets/111391755/1efa1459-711a-4b66-b187-1113e46912c8" alt="airf" width="900" height="330">
+<img src= "https://github.com/mdlangeles/Workshop_1/assets/111391755/1efa1459-711a-4b66-b187-1113e46912c8" alt="airf" width="800" height="300">
 
 # Workshop_3: Machine Learning and Data Streaming :chart_with_downwards_trend: :open_file_folder:
 ## By: María de los Ángeles Amú Moreno :woman_technologist:
@@ -35,8 +35,8 @@ The **Data** folder contains the csv worked on this project:
   - 2017.csv
   - 2018.csv
   - 2019.csv
-  - x_test.csv
-  - y_test.csv
+  - x_test.csv: this csv is saved when running the project, scan the notebooks for more detail.
+  - y_test.csv: this csv is saved when running the project, scan the notebooks for more detail.
     
 The **Model** folder contains the model.pkl used to work in this project.
 
