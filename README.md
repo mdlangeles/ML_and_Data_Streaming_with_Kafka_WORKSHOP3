@@ -1,6 +1,3 @@
-<div style="text-align: center;">
-    <img src="https://github.com/mdlangeles/Workshop_1/assets/111391755/1efa1459-711a-4b66-b187-1113e46912c8" alt="airf" width="700" height="300">
-</div>
 
 # Workshop_3: Machine Learning and Data Streaming :chart_with_downwards_trend: :open_file_folder:
 ## By: María de los Ángeles Amú Moreno :woman_technologist:
