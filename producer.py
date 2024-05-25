@@ -3,7 +3,7 @@ from json import dumps
 import pandas as pd
 from time import sleep
 import datetime as dt
-from service.transformationsFS import continent, del_cols, dummies
+from service.transformationsFS import continent, delete_columns, convert_to_dummy
 
 
 def test_data():
@@ -13,8 +13,8 @@ def test_data():
     else:
         raise ValueError("Column 'country' not found in DataFrame.")
     
-    df_test= del_cols(df_test)
-    df_test = dummies(df_test)
+    df_test= delete_columns(df_test)
+    df_test = convert_to_dummy(df_test)
 
     y_test = pd.read_csv("Data/y_test.csv")
     df_test['happiness_score'] = y_test

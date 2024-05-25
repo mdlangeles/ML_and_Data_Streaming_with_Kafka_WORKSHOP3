@@ -5,7 +5,6 @@ import pandas as pd
 import os
 import bd_config.db_query as db
 
-
 model = joblib.load('Model/model.pkl')
 
 
